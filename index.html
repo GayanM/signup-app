@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> Bootstrap 5 form validation Example </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function hideEmail() {
+            $(".email").hide()
+            $(".password").show()
+            $(".next").hide()
+            $(".submit").show()
+            $(".back").show()
+        }
+
+        function hidePassword() {
+            $(".password").hide()
+            $(".submit").hide()
+            $(".back").hide()
+
+            $(".email").show()
+            $(".next").hide()
+        }
+        function signUp() {
+
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            $.ajax({
+                type: "POST",
+                url: "https://dev-ttymk7xq.us.auth0.com/dbconnections/signup",
+                contentType: "application/json",
+                data: JSON.stringify(
+                    {
+                        email: email,
+                        password: password,
+                        connection: 'Username-Password-Authentication'
+                    }
+                ),
+                crossDomain: true,
+            });
+        }
+
+        window.onload = function () {
+            hidePassword();
+        };
+    </script>
+</head>
+
+<body>
+    <h5> User Self Signup </h5>
+    <div class="email">
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" name="email" value="Enter Email"><br>
+    </div>
+    <div class="password">
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" value="Enter Password"><br><br>
+    </div>
+    <br />
+    <button type="button" onclick="hideEmail()" class="next btn btn-primary">Next</button>
+    <button type="button" onclick="signUp()" class="submit btn btn-primary">Submit</button>
+    <button type="button" onclick="hidePassword()" class="back btn btn-primary">Back</button>
+
+</body>
+
+</html>
