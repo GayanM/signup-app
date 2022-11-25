@@ -1,7 +1,7 @@
 function signUp() {
 
     var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+    var password = document.getElementById("psw").value;
 
     $.ajax({
         type: "POST",
@@ -16,7 +16,7 @@ function signUp() {
         ),
         crossDomain: true,
         success: function (result) {
-            alert('user ' + result.email + ' created successfully')
+            document.getElementById("success_msg").innerHTML = 'user ' + result.email + ' created successfully';
         },
         error: function (err) {
             document.getElementById("response_msg").innerHTML = err.responseJSON.description;
